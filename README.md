@@ -2,7 +2,7 @@
 
 API REST completa para uma plataforma de e-commerce, desenvolvida com Java e Spring Boot. O projeto demonstra arquitetura em camadas, tratamento de erros robusto e integração com banco de dados relacional.
 
-## 🛠️ Tech Stack
+## Stacks
 
 - **Java 17** - Linguagem de programação
 - **Spring Boot 3.5.7** - Framework web
@@ -11,7 +11,7 @@ API REST completa para uma plataforma de e-commerce, desenvolvida com Java e Spr
 - **Maven** - Gerenciador de dependências
 - **H2 Database** - Banco em memória para desenvolvimento
 
-## 📋 Funcionalidades
+## Funcionalidades
 
 - ✅ CRUD completo de produtos
 - ✅ Gestão de carrinho de compras
@@ -20,7 +20,7 @@ API REST completa para uma plataforma de e-commerce, desenvolvida com Java e Spr
 - ✅ Validação de dados com Bean Validation
 - ✅ Tratamento customizado de exceções
 
-## 🏗️ Arquitetura
+## Arquitetura
 
 O projeto segue padrão de arquitetura em **3 camadas**:
 
@@ -37,7 +37,7 @@ src/main/java/com/lutheone/dscommerce/
 HTTP Request → Controller → Service → Repository → Database
 ```
 
-## 🚀 Como Executar
+## Como Executar
 
 ### Pré-requisitos
 - Java 17 ou superior
@@ -61,7 +61,7 @@ mvn spring-boot:run
 http://localhost:8080
 ```
 
-## 📚 Endpoints Principais
+## Endpoints Principais
 
 ### Produtos
 - `GET /api/products` - Listar todos os produtos
@@ -75,7 +75,7 @@ http://localhost:8080
 - `POST /api/orders` - Criar novo pedido
 - `GET /api/orders/{id}` - Detalhes do pedido
 
-## 💾 Banco de Dados
+## Banco de Dados
 
 O projeto usa H2 Database em memória. Para acessar o console:
 
@@ -86,7 +86,7 @@ User: sa
 Password: (deixar vazio)
 ```
 
-## 📖 Conceitos Demonstrados
+## Conceitos Demonstrados
 
 - **Spring Data JPA** - Operações CRUD simplificadas
 - **Relacionamentos ORM** - @OneToMany, @ManyToOne, @ManyToMany
@@ -95,7 +95,7 @@ Password: (deixar vazio)
 - **DTO Pattern** - Separação entre entidades e DTOs
 - **REST Best Practices** - Status HTTP corretos, URLs semânticas
 
-## 📝 Estrutura de Respostas
+## Estrutura de Respostas
 
 As respostas seguem um padrão consistente:
 
