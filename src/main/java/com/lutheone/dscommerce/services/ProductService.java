@@ -1,6 +1,7 @@
 package com.lutheone.dscommerce.services;
 
 import com.lutheone.dscommerce.dto.ProductDTO;
+import com.lutheone.dscommerce.dto.ProductMinDTO;
 import com.lutheone.dscommerce.entities.Product;
 import com.lutheone.dscommerce.repositories.ProductRepository;
 import com.lutheone.dscommerce.services.exceptions.DataBaseExeception;
@@ -32,9 +33,9 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true)
-    public Page<ProductDTO> findAll(String name, Pageable pageable) {
+    public Page<ProductMinDTO> findAll(String name, Pageable pageable) {
         Page<Product> page = repository.searchByName(name, pageable);
-        return page.map(ProductDTO::new);
+        return page.map(ProductMinDTO::new);
     }
 
     @Transactional
