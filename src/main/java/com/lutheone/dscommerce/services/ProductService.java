@@ -1,7 +1,9 @@
 package com.lutheone.dscommerce.services;
 
+import com.lutheone.dscommerce.dto.CategoryDTO;
 import com.lutheone.dscommerce.dto.ProductDTO;
 import com.lutheone.dscommerce.dto.ProductMinDTO;
+import com.lutheone.dscommerce.entities.Category;
 import com.lutheone.dscommerce.entities.Product;
 import com.lutheone.dscommerce.repositories.ProductRepository;
 import com.lutheone.dscommerce.services.exceptions.DataBaseExeception;
@@ -39,9 +41,9 @@ public class ProductService {
     }
 
     @Transactional
-    public ProductDTO insert(ProductDTO productDTO) {
+    public ProductDTO insert(ProductDTO dto) {
         Product entity = new Product();
-        copyDtoToEntity(productDTO, entity);
+        copyDtoToEntity(dto, entity);
         entity = repository.save(entity);
 
         return new ProductDTO(entity);
@@ -49,15 +51,14 @@ public class ProductService {
     }
 
     @Transactional
-    public ProductDTO update(Long id, ProductDTO productDTO) {
+    public ProductDTO update(Long id, ProductDTO dto) {
 
         try {
             Product entity = repository.getReferenceById(id);
-            copyDtoToEntity(productDTO, entity);
+            copyDtoToEntity(dto, entity);
             entity = repository.save(entity);
             return new ProductDTO(entity);
-        }
-        catch (EntityNotFoundException e) {
+        } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException("Id not found " + id);
         }
     }
@@ -69,17 +70,23 @@ public class ProductService {
         }
         try {
             repository.deleteById(id);
-        }
-        catch (DataIntegrityViolationException e) {
+        } catch (DataIntegrityViolationException e) {
             throw new DataBaseExeception("Cannot delete resource with id: " + id + " due to integrity violation");
         }
     }
 
-    private void copyDtoToEntity(ProductDTO productDTO, Product entity) {
-        entity.setName(productDTO.getName());
-        entity.setDescription(productDTO.getDescription());
-        entity.setPrice(productDTO.getPrice());
-        entity.setImgUrl(productDTO.getImgUrl());
+    private void copyDtoToEntity(ProductDTO dto, Product entity) {
+        entity.setName(dto.getName());
+        entity.setDescription(dto.getDescription());
+        entity.setPrice(dto.getPrice());
+        entity.setImgUrl(dto.getImgUrl());
+        entity.getCategories().clear();
+        for (CategoryDTO catDTO : dto.getCategories()) {
+            Category cat = new Category();
+            cat.setId(catDTO.getId());
+            entity.getCategories().add(cat);
+        }
+
     }
 
 }
