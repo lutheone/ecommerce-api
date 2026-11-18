@@ -20,19 +20,22 @@ public class OrderService {
     private final UserService userService;
     private final ProductRepository productRepository;
     private final OrderItemRepository orderItemRepository;
+    private final OauthService oauthService;
 
     public OrderService(OrderRepository repository,UserService userService,ProductRepository productRepository,
-                        OrderItemRepository orderItemRepository) {
+                        OrderItemRepository orderItemRepository, OauthService oauthService) {
         this.repository = repository;
         this.userService = userService;
         this.productRepository = productRepository;
         this.orderItemRepository = orderItemRepository;
+        this.oauthService = oauthService;
     }
 
     @Transactional(readOnly = true)
     public OrderDTO findById(Long id) {
-        return repository.findById(id).map(OrderDTO::new).orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
-
+        Order order = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Entity not found."));
+        oauthService.validateSelfOrAdmin(order.getClient().getId());
+        return new OrderDTO(order);
     }
 
     @Transactional

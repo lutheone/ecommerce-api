@@ -3,6 +3,7 @@ package com.lutheone.dscommerce.controllers.handlers;
 import com.lutheone.dscommerce.dto.CustomError;
 import com.lutheone.dscommerce.dto.ValidationError;
 import com.lutheone.dscommerce.services.exceptions.DataBaseExeception;
+import com.lutheone.dscommerce.services.exceptions.ForbiddenExeception;
 import com.lutheone.dscommerce.services.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -40,6 +41,13 @@ public class ControllerExceptionHandler {
         for (FieldError f : e.getBindingResult().getFieldErrors()) {
             err.addError(f.getField(), f.getDefaultMessage());
         }
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(ForbiddenExeception.class)
+    public ResponseEntity<CustomError> forbidden(ForbiddenExeception e, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.FORBIDDEN;
+        CustomError err = new CustomError(Instant.now(), String.valueOf(status.value()), e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
     }
 

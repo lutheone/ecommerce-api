@@ -86,6 +86,23 @@ public class User implements UserDetails{
         this.birthDate = birthDate;
     }
 
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public boolean hasRole(String roleName) {
+        for (Role role : roles) {
+            if (role.getAuthority().equals(roleName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
@@ -136,15 +153,6 @@ public class User implements UserDetails{
         roles.add(role);
     }
 
-    public boolean hasRole(String roleName) {
-        for (Role role : roles) {
-            if (role.getAuthority().equals(roleName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -157,4 +165,5 @@ public class User implements UserDetails{
     public int hashCode() {
         return getId().hashCode();
     }
+
 }
