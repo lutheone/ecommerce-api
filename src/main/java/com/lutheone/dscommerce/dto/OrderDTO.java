@@ -3,6 +3,7 @@ package com.lutheone.dscommerce.dto;
 import com.lutheone.dscommerce.entities.Order;
 import com.lutheone.dscommerce.entities.OrderItem;
 import com.lutheone.dscommerce.entities.OrderStatus;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class OrderDTO {
 
     private PaymentDTO payment;
 
+    @NotEmpty(message = "Product must have at least one category")
     private final List<OrderItemDTO> items = new ArrayList<>();
 
 
