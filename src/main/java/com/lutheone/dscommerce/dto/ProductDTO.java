@@ -3,10 +3,7 @@ package com.lutheone.dscommerce.dto;
 import com.lutheone.dscommerce.entities.Category;
 import com.lutheone.dscommerce.entities.Product;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +20,7 @@ public class ProductDTO {
     @NotBlank(message = "Field cannot be blank")
     private String description;
 
+    @NotNull(message = "Price cannot be null")
     @Positive(message = "Price must be positive")
     private Double price;
     private String imgUrl;
