@@ -209,7 +209,3 @@ O código principal fica em `src/main/java/com/lutheone/dscommerce` e está sepa
 - `config`: configurações de segurança e da aplicação, incluindo o Authorization Server, o Resource Server e o grant customizado
 
 O fluxo de uma requisição segue a estrutura `Controller → Service → Repository → Banco de dados`.
-
-## Licença
-
-Nenhuma licença foi definida neste repositório até o momento.
